@@ -7,10 +7,10 @@ import java.io.FileOutputStream;
 
 public class CertificateGenerator {
 
-    private static String FILE = "certificate.pdf";
-    private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+    private static final String FILE = "certificate.pdf";
+    private static final Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.NORMAL);
-    private static Font introFont = new Font(Font.FontFamily.COURIER, 9,
+    private static final Font introFont = new Font(Font.FontFamily.COURIER, 9,
             Font.NORMAL);
 
     private static void addMetaData(Document document) {

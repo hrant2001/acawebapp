@@ -1,5 +1,7 @@
 package com.hrant.demo.model;
 
+import java.util.Objects;
+
 public class Applicant {
 
     private int applicantId;
@@ -83,5 +85,18 @@ public class Applicant {
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Applicant applicant = (Applicant) o;
+        return applicantId == applicant.applicantId && Objects.equals(applicantName, applicant.applicantName) && Objects.equals(email, applicant.email) && Objects.equals(phoneNumber, applicant.phoneNumber) && Objects.equals(address, applicant.address) && Objects.equals(status, applicant.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(applicantId, applicantName, email, phoneNumber, address, status);
     }
 }

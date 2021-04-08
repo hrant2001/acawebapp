@@ -1,5 +1,7 @@
 package com.hrant.demo.model;
 
+import java.util.Objects;
+
 public class Course {
 
 
@@ -84,5 +86,18 @@ public class Course {
                 ", teacherName='" + teacherName + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return courseId == course.courseId && Objects.equals(courseName, course.courseName) && Objects.equals(startDate, course.startDate) && Objects.equals(endDate, course.endDate) && Objects.equals(teacherName, course.teacherName) && Objects.equals(description, course.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseId, courseName, startDate, endDate, teacherName, description);
     }
 }
