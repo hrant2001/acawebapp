@@ -2,6 +2,7 @@ package com.hrant.demo.service;
 
 import com.hrant.demo.model.Applicant;
 import com.hrant.demo.model.Course;
+import com.hrant.demo.model.Status;
 import com.hrant.demo.repository.ApplicantRepository;
 import com.hrant.demo.repository.CourseRepository;
 import com.itextpdf.text.*;
@@ -15,14 +16,13 @@ import java.time.LocalDate;
 @Service
 public class CertificateService {
 
-    private static final String FILE = "applicant_certificate.pdf";
+    private final ApplicantRepository applicantRepository;
+    private final CourseRepository courseRepository;
+
     private static final Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.NORMAL);
     private static final Font introFont = new Font(Font.FontFamily.COURIER, 9,
             Font.NORMAL);
-
-    private final ApplicantRepository applicantRepository;
-    private final CourseRepository courseRepository;
 
     @Autowired
     public CertificateService(ApplicantRepository applicantRepository, CourseRepository courseRepository) {
@@ -85,8 +85,15 @@ public class CertificateService {
 
     public void generateCertificate(int id) {
 
+        if(applicantRepository.findById(id).orElse(null).getStatus() != Status.COMPLETED) {
+            System.out.println("Applicant did not complete the course"); // maybe with Logger
+            return;
+        }
+
         try {
             Document document = new Document();
+            String[] fullName = applicantRepository.findById(id).orElse(null).getApplicantName().toLowerCase().split(" ");
+            String FILE = fullName[0] + "_" + fullName[1] + "_certificate.pdf";
             PdfWriter.getInstance(document, new FileOutputStream(FILE));
             document.open();
             addMetaData(document);

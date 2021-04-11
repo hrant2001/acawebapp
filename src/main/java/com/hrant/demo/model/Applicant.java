@@ -27,7 +27,8 @@ public class Applicant {
     private String address;
 
     @Column(name="status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @JsonIgnore
     @ManyToOne
@@ -37,7 +38,7 @@ public class Applicant {
     public Applicant() {
     }
 
-    public Applicant(String applicantName, String email, String phoneNumber, String address, String status, Course course) {
+    public Applicant(String applicantName, String email, String phoneNumber, String address, Status status, Course course) {
         this.applicantName = applicantName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -86,11 +87,11 @@ public class Applicant {
         this.address = address;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

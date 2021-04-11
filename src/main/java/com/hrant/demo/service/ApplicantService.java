@@ -23,11 +23,6 @@ public class ApplicantService {
         return applicantRepository.save(applicant);
     }
 
-    // Add also in Controller
-    public List<Applicant> addApplicants(List<Applicant> applicants) {
-        return applicantRepository.saveAll(applicants);
-    }
-
     public List<Applicant> getAllApplicant() {
         return applicantRepository.findAll();
     }
