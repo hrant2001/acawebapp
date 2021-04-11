@@ -10,8 +10,8 @@ public class AcaWebAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AcaWebAppApplication.class, args);
 
-        CertificateGenerator demoCertificate = new CertificateGenerator();
-        demoCertificate.generateCertificate();
+//        CertificateGenerator demoCertificate = new CertificateGenerator();
+//        demoCertificate.generateCertificate();
     }
 
 }

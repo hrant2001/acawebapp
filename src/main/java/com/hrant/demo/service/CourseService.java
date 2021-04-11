@@ -18,23 +18,23 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public int addCourse(Course course) {
-        return courseRepository.insertCourse(course);
+    public Course addCourse(Course course) {
+        return courseRepository.save(course);
     }
 
     public List<Course> getAllCourse() {
-        return courseRepository.selectAllCourse();
+        return courseRepository.findAll();
     }
 
     public Optional<Course> getCourseById(int id) {
-        return courseRepository.selectCourseById(id);
+        return courseRepository.findById(id);
     }
 
-    public int deleteCourse(int id) {
-        return courseRepository.deleteCourseById(id);
+    public void deleteCourse(int id) {
+        courseRepository.deleteById(id);
     }
 
-    public int updateCourse(Course newCourse, int id) {
-        return courseRepository.updateCourseById(newCourse, id);
-    }
+//    public int updateCourse(Course newCourse, int id) {
+//        return courseRepository.updateCourseById(newCourse, id);
+//    }
 }

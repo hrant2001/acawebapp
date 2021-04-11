@@ -19,23 +19,30 @@ public class ApplicantService {
         this.applicantRepository = applicantRepository;
     }
 
-    public int addApplicant(Applicant applicant) {
-        return applicantRepository.insertApplicant(applicant);
+    public Applicant addApplicant(Applicant applicant) {
+        return applicantRepository.save(applicant);
+    }
+
+    // Add also in Controller
+    public List<Applicant> addApplicants(List<Applicant> applicants) {
+        return applicantRepository.saveAll(applicants);
     }
 
     public List<Applicant> getAllApplicant() {
-        return applicantRepository.selectAllApplicant();
+        return applicantRepository.findAll();
     }
 
     public Optional<Applicant> getPersonById(int id) {
-        return applicantRepository.selectApplicantById(id);
+        return applicantRepository.findById(id);
     }
 
-    public int deletePerson(int id) {
-        return applicantRepository.deleteApplicantById(id);
+    public void deletePerson(int id) {
+        applicantRepository.deleteById(id);
     }
 
-    public int updatePerson(Applicant newApplicant, int id) {
-        return applicantRepository.updateApplicantById(newApplicant, id);
-    }
+//    public Applicant updatePerson(Applicant newApplicant, int id) {
+//        Applicant existingApplicant = applicantRepository.findById(id).orElse(null);
+//        existingApplicant
+//        return applicantRepository.save(newApplicant);
+//    }
 }

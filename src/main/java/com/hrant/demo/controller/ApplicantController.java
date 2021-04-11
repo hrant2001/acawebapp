@@ -22,7 +22,7 @@ public class ApplicantController {
     }
 
     @PostMapping
-    public int addPerson(@Valid @NonNull @RequestBody Applicant applicant) {
+    public Applicant addPerson(@Valid @NonNull @RequestBody Applicant applicant) {
         return applicantService.addApplicant(applicant);
     }
 
@@ -33,17 +33,16 @@ public class ApplicantController {
 
     @GetMapping(path = "{id}")
     public Applicant getPersonById(@PathVariable("id") int id) {
-        return applicantService.getPersonById(id)
-                .orElse(null);
+        return applicantService.getPersonById(id).orElse(null);
     }
 
     @DeleteMapping(path = "{id}")
-    public int deletePersonById(@PathVariable("id") int id) {
-        return applicantService.deletePerson(id);
+    public void deletePersonById(@PathVariable("id") int id) {
+        applicantService.deletePerson(id);
     }
 
-    @PutMapping(path = "{id}")
-    public int updatePerson(@Valid @NotNull @RequestBody Applicant applicantToUpdate, @PathVariable("id") int id) {
-        return applicantService.updatePerson(applicantToUpdate, id);
-    }
+//    @PutMapping(path = "{id}")
+//    public Applicant updatePerson(@Valid @NotNull @RequestBody Applicant applicantToUpdate, @PathVariable("id") int id) {
+//        return applicantService.updatePerson(applicantToUpdate, id);
+//    }
 }

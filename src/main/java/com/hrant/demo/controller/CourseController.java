@@ -22,7 +22,7 @@ public class CourseController {
     }
 
     @PostMapping
-    public int addCourse(@Valid @NonNull @RequestBody Course course) {
+    public Course addCourse(@Valid @NonNull @RequestBody Course course) {
         return courseService.addCourse(course);
     }
 
@@ -38,12 +38,12 @@ public class CourseController {
     }
 
     @DeleteMapping(path = "{id}")
-    public int deleteCourseById(@PathVariable("id") int id) {
-        return courseService.deleteCourse(id);
+    public void deleteCourseById(@PathVariable("id") int id) {
+        courseService.deleteCourse(id);
     }
 
-    @PutMapping(path = "{id}")
-    public int updateCourse(@Valid @NotNull @RequestBody Course courseToUpdate, @PathVariable("id") int id) {
-        return courseService.updateCourse(courseToUpdate, id);
-    }
+//    @PutMapping(path = "{id}")
+//    public int updateCourse(@Valid @NotNull @RequestBody Course courseToUpdate, @PathVariable("id") int id) {
+//        return courseService.updateCourse(courseToUpdate, id);
+//    }
 }

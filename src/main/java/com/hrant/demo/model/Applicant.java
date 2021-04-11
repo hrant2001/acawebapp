@@ -1,30 +1,49 @@
 package com.hrant.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="applicants")
 public class Applicant {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name="applicant_id")
     private int applicantId;
 
+    @Column(name="applicant_name")
     private String applicantName;
 
+    @Column(name="email")
     private String email;
 
+    @Column(name="phone_number")
     private String phoneNumber;
 
+    @Column(name="address")
     private String address;
 
+    @Column(name="status")
     private String status;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public Applicant() {
     }
 
-    public Applicant(String applicantName, String email, String phoneNumber, String address, String status) {
+    public Applicant(String applicantName, String email, String phoneNumber, String address, String status, Course course) {
         this.applicantName = applicantName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.status = status;
+        this.course = course;
     }
 
     public int getApplicantId() {
@@ -75,6 +94,14 @@ public class Applicant {
         this.status = status;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     @Override
     public String toString() {
         return "Applicant{" +
@@ -84,6 +111,7 @@ public class Applicant {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
+                ", course='" + course + '\'' +
                 '}';
     }
 
@@ -92,11 +120,11 @@ public class Applicant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Applicant applicant = (Applicant) o;
-        return applicantId == applicant.applicantId && Objects.equals(applicantName, applicant.applicantName) && Objects.equals(email, applicant.email) && Objects.equals(phoneNumber, applicant.phoneNumber) && Objects.equals(address, applicant.address) && Objects.equals(status, applicant.status);
+        return applicantId == applicant.applicantId && Objects.equals(applicantName, applicant.applicantName) && Objects.equals(email, applicant.email) && Objects.equals(phoneNumber, applicant.phoneNumber) && Objects.equals(address, applicant.address) && Objects.equals(status, applicant.status) && Objects.equals(course, applicant.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicantId, applicantName, email, phoneNumber, address, status);
+        return Objects.hash(applicantId, applicantName, email, phoneNumber, address, status, course);
     }
 }
