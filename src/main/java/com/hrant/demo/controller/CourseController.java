@@ -31,9 +31,15 @@ public class CourseController {
         return courseService.getAllCourse();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "id/{id}")
     public Course getCourseById(@PathVariable("id") int id) {
         return courseService.getCourseById(id)
+                .orElse(null);
+    }
+
+    @GetMapping(path = "name/{name}")
+    public Course getCourseByName(@PathVariable("name") String courseName) {
+        return courseService.getCourseByName(courseName)
                 .orElse(null);
     }
 

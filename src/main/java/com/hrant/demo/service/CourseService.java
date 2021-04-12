@@ -30,6 +30,10 @@ public class CourseService {
         return courseRepository.findById(id);
     }
 
+    public Optional<Course> getCourseByName(String name) {
+        return courseRepository.findByCourseName(name);
+    }
+
     public void deleteCourse(int id) {
         courseRepository.deleteById(id);
     }
