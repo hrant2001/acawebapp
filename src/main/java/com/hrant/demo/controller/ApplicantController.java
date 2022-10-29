@@ -3,6 +3,8 @@ package com.hrant.demo.controller;
 import com.hrant.demo.model.Applicant;
 import com.hrant.demo.service.ApplicantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,18 +24,18 @@ public class ApplicantController {
     }
 
     @PostMapping
-    public Applicant addPerson(@Valid @NonNull @RequestBody Applicant applicant) {
-        return applicantService.addApplicant(applicant);
+    public ResponseEntity<Applicant> addPerson(@Valid @NonNull @RequestBody Applicant applicant) {
+        return new ResponseEntity<>(applicantService.addApplicant(applicant), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Applicant> getAllPeople() {
-        return applicantService.getAllApplicant();
+    public ResponseEntity<List<Applicant>> getAllPeople() {
+        return new ResponseEntity<>(applicantService.getAllApplicant(), HttpStatus.OK);
     }
 
     @GetMapping(path = "{id}")
-    public Applicant getPersonById(@PathVariable("id") int id) {
-        return applicantService.getPersonById(id).orElse(null);
+    public ResponseEntity<Applicant> getPersonById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(applicantService.getPersonById(id).orElse(null), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{id}")

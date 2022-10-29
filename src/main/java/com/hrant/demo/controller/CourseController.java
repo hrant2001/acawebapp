@@ -3,6 +3,8 @@ package com.hrant.demo.controller;
 import com.hrant.demo.model.Course;
 import com.hrant.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,25 +24,25 @@ public class CourseController {
     }
 
     @PostMapping
-    public Course addCourse(@Valid @NonNull @RequestBody Course course) {
-        return courseService.addCourse(course);
+    public ResponseEntity<Course> addCourse(@Valid @NonNull @RequestBody Course course) {
+        return new ResponseEntity<>(courseService.addCourse(course), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Course> getAllCourse() {
-        return courseService.getAllCourse();
+    public ResponseEntity<List<Course>> getAllCourse() {
+        return new ResponseEntity<>(courseService.getAllCourse(), HttpStatus.OK);
     }
 
     @GetMapping(path = "id/{id}")
-    public Course getCourseById(@PathVariable("id") int id) {
-        return courseService.getCourseById(id)
-                .orElse(null);
+    public ResponseEntity<Course> getCourseById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(courseService.getCourseById(id)
+                .orElse(null), HttpStatus.OK);
     }
 
     @GetMapping(path = "name/{name}")
-    public Course getCourseByName(@PathVariable("name") String courseName) {
-        return courseService.getCourseByName(courseName)
-                .orElse(null);
+    public ResponseEntity<Course> getCourseByName(@PathVariable("name") String courseName) {
+        return new ResponseEntity<>(courseService.getCourseByName(courseName)
+                .orElse(null), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{id}")

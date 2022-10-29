@@ -10,6 +10,6 @@ public class HomeController {
 
     @GetMapping
     public String home() {
-        return "ALOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+        return "Home Page of our academy website";
     }
 }
